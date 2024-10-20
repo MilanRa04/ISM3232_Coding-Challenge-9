@@ -48,3 +48,34 @@ class Section {
         });
     }
 }
+
+// Task 3: Create a Patron Class that has the properties name of patron, and borrowedBooks that shows the books they have borrowed
+class Patron {
+    constructor(name) {
+        this.name = name;
+        this.borrowedBooks = [];
+    }
+
+    //Method to borrow a book if available
+    borrowedBook(book) {
+        if (book.isAvailable) {
+            book.isAvailable = false;
+            this.borrowedBooks.push(book);
+            console.log(`${this.name} borrowed "${book.title}.`); 
+        } else {
+            console.log(`Sorry, "${book.title}" is currently unavailable.`);
+        }
+    }
+
+    // Methiod to return a borrowed book
+    returnBook(book) {
+        const index = this.borrowedBooks.indexOf(book);
+        if (index !== -1) {
+            book.isAvailable = true;
+            this.borrowedBooks.splice(index, 1);
+            console.log(`${this.name} returned "${book.title}.`);
+        } else {
+            console.log(`${this.name} returned "${book.title}".`);
+        }
+    }
+}
