@@ -47,7 +47,14 @@ class Section {
             console.log(`${book.title} - ${book.isAvailable ? 'Available' : 'Borrowed'}`);
         });
     }
+
+    // Task 5:
+    // New Method to calculate total available books in the section 
+    calculateTotalBooksAvailable() {
+        return this.getAvailableBooks();
+    }
 }
+
 
 // Task 3: Create a Patron Class that has the properties name of patron, and borrowedBooks that shows the books they have borrowed
 class Patron {
@@ -96,3 +103,7 @@ class VIPPatron extends Patron {
         }
     }
 }
+
+
+// Task 5: Handle books borrowing and returning
+// The code can be found under task 2 started at line 51.
