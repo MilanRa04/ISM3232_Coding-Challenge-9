@@ -64,7 +64,7 @@ class Patron {
     }
 
     //Method to borrow a book if available
-    borrowedBook(book) {
+    borrowBook(book) {
         if (book.isAvailable) {
             book.isAvailable = false;
             this.borrowedBooks.push(book);
@@ -74,7 +74,7 @@ class Patron {
         }
     }
 
-    // Methiod to return a borrowed book
+    // Method to return a borrowed book
     returnBook(book) {
         const index = this.borrowedBooks.indexOf(book);
         if (index !== -1) {
@@ -95,7 +95,7 @@ class VIPPatron extends Patron {
     }
 
     // Override the borrowBook method for VIP Patrons
-    borrowedBook(book) {
+    borrowBook(book) {
         if (book.isAvailable) {
             super.borrowedBook(book);
         } else {
@@ -107,3 +107,39 @@ class VIPPatron extends Patron {
 
 // Task 5: Handle books borrowing and returning
 // The code can be found under task 2 started at line 51.
+
+// Task 6: Create and Manage Sections and Patrons
+
+// Create sections
+const fiction = new Section("Fiction");
+const science = new Section("Science");
+
+// Create books
+const book1 = new Book("1984", "George Orwell", "1234567890");
+const book2 = new Book("Brave New World", "Aldous Huxley", "0987654321");
+const book3 = new Book("The Selfish Gene", "Richard Dawkins", "1122334455");
+
+// Add books to sections
+fiction.addBook(book1);
+fiction.addBook(book2);
+science.addBook(book3);
+
+// Create patrons
+const regularPatron = new Patron("John Doe");
+const vipPatron = new VIPPatron("Jane Smith", true);
+
+// Regular patron tries to borrow a book
+regularPatron.borrowBook(book1);
+
+// VIP patron tries to borrow the same book (VIP gets priority)
+vipPatron.borrowBook(book1);
+
+// Regular patron returns the book
+regularPatron.returnBook(book1);
+
+// List all books in the Fiction section
+fiction.listBooks();
+
+// Calculate total available books in each section
+console.log(`Total available books in Fiction: ${fiction.getAvailableBooks()}`);
+console.log(`Total available books in Science: ${science.getAvailableBooks()}`);
